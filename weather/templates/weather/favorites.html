@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2><i class="fas fa-heart"></i> Your Favorite Cities</h2>
+    <div class="row">
+        {% for fav in favorites %}
+        <div class="col-md-4 mb-4">
+            <div class="weather-card p-3">
+                <h4>{{ fav.city }}, {{ fav.country_code }}</h4>
+                <a href="{% url 'index' %}?city={{ fav.city }}"
+                   class="btn btn-search mt-2">
+                   Check Weather
+                </a>
+                <form method="POST" action="{% url 'toggle_favorite' %}" class="d-inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="city" value="{{ fav.city }}">
+                    <button type="submit" class="btn btn-danger ms-2">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p>No favorites yet. Search for a city to add!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

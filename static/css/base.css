@@ -54,3 +54,10 @@ body {
     font-size: 2rem;
     margin-bottom: 10px;
 }
+.favorite-btn .fas.fa-star {
+        color:gold;
+        transition: color 0.3s;
+    }
+    .favorite-btn:hover .fas.fa-star {
+        color: gold;
+    }

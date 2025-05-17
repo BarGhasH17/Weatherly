@@ -1,7 +1,9 @@
-Add user authentication and static files support
+Implement server-side favorites functionality
 
-- Implemented login/logout functionality with dedicated templates
-- Added base.html for template inheritance
-- Configured static files handling in settings.py
-- Updated views and URLs for auth flow
-- Created static/ directory for CSS/assets
+- Added FavoriteCity model with user/city relationship
+- Created toggle_favorite view with form submission
+- Built favorites.html template for saved cities list
+- Updated navbar with favorites link
+- Improved base.css for better button styling
+- Modified index view to preserve search queries
+- Added user feedback messages system
