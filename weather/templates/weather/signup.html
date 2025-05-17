@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="weather-card p-4 text-center">
+                <h1 class="mb-4">Weatherly</h1>
+                <p class="mb-4">Create your account to save favorite cities and view search history</p>
+                
+                <!-- Signup Form -->
+                <form method="POST" action="{% url 'signup' %}">
+                    {% csrf_token %}
+                    
+                    <!-- Username -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" class="form-control search-bar" 
+                               name="username" placeholder="Username" required>
+                    </div>
+                    
+                    <!-- Password 1 -->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" class="form-control search-bar" 
+                               name="password1" placeholder="Password" required>
+                    </div>
+                    
+                    <!-- Password 2 -->
+                    <div class="input-group mb-4">
+                        <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                        <input type="password" class="form-control search-bar" 
+                               name="password2" placeholder="Confirm Password" required>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-search w-100 mb-3">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                    
+                    <!-- Login Link -->
+                    <p class="mt-3">
+                        Already have an account? 
+                        <a href="{% url 'login' %}" class="text-white">Log In</a>
+                    </p>
+                </form>
+                
+                <!-- Error Messages -->
+                {% if form.errors %}
+                <div class="alert alert-danger mt-3">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

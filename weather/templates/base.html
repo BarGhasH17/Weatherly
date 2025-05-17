@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weatherly | Real-Time Forecast</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold fs-3" href="{% url 'index' %}">
+                <i class="fas fa-cloud-sun me-2"></i>Weatherly
+            </a>
+            
+            <div class="d-flex align-items-center">
+                {% if user.is_authenticated %}
+                    <!-- Logged In View -->
+                    <span class="navbar-text text-white me-3 d-none d-sm-block">
+                        Welcome, {{ user.username }}!
+                    </span>
+                    <a href="{% url 'logout' %}" class="btn btn-search">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                {% else %}
+                    <!-- Guest View -->
+                    <a href="{% url 'login' %}" class="btn btn-search me-2">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <a href="{% url 'signup' %}" class="btn btn-search">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+   {% block content %}{% endblock %}
+    <!-- Bootstrap JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Simple JS for demo (connect to a weather API later) -->
+    <script>
+        document.getElementById('search-btn').addEventListener('click', function() {
+            const city = document.getElementById('city-input').value;
+            if (city.trim() === '') return;
+            
+            // Simulate API call (replace with real API like OpenWeatherMap)
+            document.getElementById('weather-display').classList.remove('d-none');
+            document.querySelector('.city-name').textContent = city;
+            
+            // Random demo data (replace with real API data)
+            const temp = Math.floor(Math.random() * 30) + 10;
+            document.querySelector('.temperature').textContent = `${temp}°C`;
+            
+            // Change icon based on temp (demo logic)
+            const icon = temp > 25 ? 'fa-sun' : temp > 15 ? 'fa-cloud-sun' : 'fa-cloud';
+            document.querySelector('.weather-icon i').className = `fas ${icon}`;
+        });
+    </script>
+</body>
+</html>

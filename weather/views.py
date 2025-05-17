@@ -1,10 +1,36 @@
 import os
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import json
 import urllib.request
 from dotenv import load_dotenv
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.forms import UserCreationForm
 
-# Create your views here.
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserCreationForm()
+    return render(request, "weather/signup.html", {'form': form})
+
+def user_login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect('index')
+    return render(request, 'weather/login.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')
+
 def index(request):
     data = {}
     load_dotenv()
