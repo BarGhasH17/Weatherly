@@ -1,6 +1,7 @@
-Initial project setup
+Add user authentication and static files support
 
-- Added core Django project files (settings, urls, wsgi)
-- Created weather app with views, templates, and URLs
-- Set up basic project structure with requirements.txt and .gitignore
-- Ready for weather API integration
+- Implemented login/logout functionality with dedicated templates
+- Added base.html for template inheritance
+- Configured static files handling in settings.py
+- Updated views and URLs for auth flow
+- Created static/ directory for CSS/assets
