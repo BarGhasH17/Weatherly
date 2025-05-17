@@ -1,0 +1,6 @@
+Initial project setup
+
+- Added core Django project files (settings, urls, wsgi)
+- Created weather app with views, templates, and URLs
+- Set up basic project structure with requirements.txt and .gitignore
+- Ready for weather API integration
